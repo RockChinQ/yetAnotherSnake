@@ -59,15 +59,12 @@ public class Snake {
     public void turnTo(EnumSnackDirection direction){
         //检查头部line2D对象是否只有一个点
         Line2D head=this.body.get(this.body.size()-1);
-        if (head.getX1()==head.getX2()&&head.getY1()==head.getY2()){
-            //如果只有一个点，则删除此line2D对象
-            this.body.remove(head);
-            head=this.body.get(this.body.size()-1);
+        if (!(head.getX1()==head.getX2()&&head.getY1()==head.getY2())){
+            //不只有一个点，则压入一个新的line2D对象作为新的一段身体
+            this.body.add(new Line2D.Double(head.getP2(),head.getP2()));
         }
-        //向body压入新的一条身体line2D对象
-        this.body.add(new Line2D.Double(head.getP2(),head.getP2()));
 
-        //设置方向
+        //设置方向向量
         switch (direction){
             case NORTH:
                 this.towards.setLocation(0,-1);
